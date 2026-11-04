@@ -1,0 +1,291 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>솔린 촬영 체크리스트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* 직접 촬영용 체크리스트: 찍는 순서대로 한 줄, 탭하면 체크(이 기기에만 저장). 강조색 하나, 카드 대신 선 */
+:root {
+  --bg: #ffffff; --ink: #191f28; --body: #333d4b; --ink2: #4e5968; --ink3: #8b95a1;
+  --line: #e5e8eb; --fill: #f2f4f6; --fill2: #f9fafb;
+  --accent: #3182f6; --accent-bg: #e8f3ff; --accent-ink: #1b64da;
+  --font: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #17171c; --ink: #ececf0; --body: #c9ced6; --ink2: #a8b0ba; --ink3: #7e8792;
+  --line: #2c2c35; --fill: #232329; --fill2: #1d1d23;
+  --accent: #4c9bff; --accent-bg: #1c2a40; --accent-ink: #8bbcff; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #17171c; --ink: #ececf0; --body: #c9ced6; --ink2: #a8b0ba; --ink3: #7e8792;
+  --line: #2c2c35; --fill: #232329; --fill2: #1d1d23;
+  --accent: #4c9bff; --accent-bg: #1c2a40; --accent-ink: #8bbcff; color-scheme: dark }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--body); font-family: var(--font); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+b, strong { color: var(--ink); font-weight: 700; }
+main { max-width: 760px; margin: 0 auto; padding-block: 40px 96px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+.crumb { font-size: 14px; color: var(--ink3); }
+h1 { font-size: 30px; line-height: 1.35; letter-spacing: -0.025em; color: var(--ink); margin: 4px 0 16px; font-weight: 700; text-wrap: balance; }
+.kinds { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.kinds div { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.kinds div > span:first-child { font-weight: 700; color: var(--accent-ink); }
+.kinds div > span:last-child { min-width: 0; color: var(--ink2); }
+.kinds b { display: block; }
+.note { font-size: 14px; color: var(--ink3); margin: 12px 0 0; }
+.prog { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); padding: 12px 0 10px; margin-top: 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink2); }
+.prog .bar { flex: 1; height: 6px; border-radius: 3px; background: var(--fill); overflow: hidden; }
+.prog .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.prog span { font-variant-numeric: tabular-nums; }
+.prog button { font: inherit; font-size: 13px; border: 0; background: var(--fill); color: var(--ink2); padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+.prog button:focus-visible, .cut:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h2 { font-size: 18px; color: var(--ink); margin: 40px 0 0; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-weight: 700; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+h2 .when { font-size: 13px; font-weight: 500; color: var(--ink3); }
+.cut { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+.cut > div { min-width: 0; }
+.cut .ck { width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--line); margin-top: 3px; display: grid; place-items: center; color: transparent; font-size: 14px; font-weight: 700; }
+.cut.done .ck { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cut.done > div { opacity: .45; }
+.cut b { font-size: 16.5px; display: block; }
+.cut p { margin: 2px 0 0; font-size: 14.5px; color: var(--ink2); line-height: 1.6; }
+.say { display: block; margin-top: 6px; font-size: 14.5px; color: var(--ink); background: var(--fill); border-radius: 8px; padding: 6px 10px; }
+.say::before { content: "멘트"; margin-right: 6px; color: var(--ink3); font-size: 12.5px; }
+.say.q { background: var(--accent-bg); }
+.say.q::before { content: "질문"; color: var(--accent-ink); }
+.say.a { background: transparent; border-left: 2px solid var(--line); border-radius: 0; padding: 2px 10px; margin-top: 4px; color: var(--ink2); }
+.say.a::before { content: "답변 예시"; }
+.say.a em { font-style: normal; color: var(--ink); font-weight: 700; }
+.say.nar { line-height: 1.85; padding: 10px 12px; }
+.say.nar::before { content: "나레이션"; display: block; margin: 0 0 2px; }
+.tag { display: inline-block; margin-left: 6px; font-size: 12px; font-weight: 700; color: var(--accent-ink); background: var(--accent-bg); border-radius: 5px; padding: 0 6px; vertical-align: 2px; }
+.tag.k { color: var(--ink2); background: var(--fill); }
+ul.dot { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 6px; font-size: 15px; }
+ul.dot li::marker { color: var(--ink3); }
+.how { border-top: 1px solid var(--line); padding: 16px 0; }
+.how-h { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 16px; }
+.kb { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; background: var(--accent-bg); color: var(--accent-ink); font-size: 12.5px; font-weight: 700; }
+.pill { font-size: 12px; padding: 2px 9px; border-radius: 99px; font-weight: 600; }
+.pill.real { background: var(--fill); color: var(--ink2); }
+.pill.ai { background: var(--accent-bg); color: var(--accent-ink); }
+.how-g { display: grid; grid-template-columns: 180px 1fr; gap: 16px; margin-top: 12px; align-items: start; }
+.how-g > * { min-width: 0; }
+.ref { margin: 0; }
+.ref video { width: 100%; max-width: 100%; aspect-ratio: 9/16; border-radius: 10px; background: #000; display: block; object-fit: cover; }
+.ref figcaption { font-size: 12.5px; color: var(--ink3); margin-top: 6px; line-height: 1.5; }
+.ref a { color: var(--accent-ink); }
+.lead { margin: 0 0 8px; font-size: 14.5px; color: var(--ink); }
+.flow { margin: 0; padding-left: 18px; font-size: 14px; color: var(--ink2); display: grid; gap: 4px; }
+.flow b { display: inline-block; min-width: 62px; color: var(--ink); font-weight: 600; }
+.src { font-size: 13px; color: var(--ink3); margin: 10px 0 0; }
+.nar-d { margin-top: 12px; }
+.nar-d summary { cursor: pointer; font-size: 14px; color: var(--accent-ink); font-weight: 600; }
+.scr { margin-top: 10px; border-top: 1px solid var(--line); }
+.scr .sh, .scr .r { display: grid; grid-template-columns: minmax(0, 1fr) 11em; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.scr .sh { font-size: 12.5px; color: var(--ink3); padding: 6px 0; }
+.scr .l { min-width: 0; font-size: 15px; color: var(--ink); line-height: 1.55; }
+.scr .v { min-width: 0; font-size: 13px; color: var(--ink2); line-height: 1.5; }
+@media (max-width: 600px) { .scr .sh { display: none; } .scr .r { grid-template-columns: 1fr; gap: 2px; } .scr .v::before { content: "화면 · "; color: var(--ink3); } }
+.nt { margin: 12px 0 0; font-size: 13px; font-weight: 600; color: var(--ink2); }
+@media (max-width: 600px) {
+  .how-g { grid-template-columns: 1fr; } .ref video { max-width: 240px; }
+  main { padding-block: 24px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1 { font-size: 25px; }
+}
+@media (prefers-reduced-motion: reduce) { .prog .bar i { transition: none; } }
+</style>
+
+<main>
+  <div class="crumb">솔린의원 · 11월 5일 · 모델: 상담실장님</div>
+  <h1>상담실장님 세르프 · 쥬베리톡스 촬영</h1>
+  <div class="kinds">
+    <div><span>A</span><span><b>실장님 단독</b>유니폼으로 앉아서 풀 대본. 사이사이 비포·애프터와 시술 장면. 시술별 1편</span></div>
+    <div><span>B</span><span><b>원장님 설명</b>시술하면서 질문에 답함. 답은 길게 받고 핵심 한 줄만 편집</span></div>
+    <div><span>C</span><span><b>쉬는 날 브이로그</b>대사 없이 오고, 받고, 가는 모습만. 목소리는 편집 때 AI 나레이션</span></div>
+  </div>
+  <p class="note">찍는 순서대로 적었습니다. 탭하면 체크됩니다. 대사는 실장님 실제 경험과 다르면 실장님 말로 바꿔 주세요.</p>
+
+  <h2>만드는 방식 <span class="when">버전별 레퍼런스 · 결과물</span></h2>
+
+  <section class="how">
+    <div class="how-h"><span class="kb">A</span><b>실장님 단독 · 앉아서 풀 대본</b><span class="pill real">실제 목소리</span></div>
+    <div class="how-g">
+      <figure class="ref"><video controls playsinline preload="metadata" src="ref/ref_a.mp4"></video>
+        <figcaption>명동 닥터준우 · 유니폼 직원이 받고 원장님께 묻기</figcaption></figure>
+      <div class="how-b">
+        <p class="lead">유니폼 입은 실장님이 앉아서 결과를 보여 주며 말합니다. 소개 멘트 없이 자막 "상담실장"으로만. 대본은 ⑤ ⑦에.</p>
+        <ol class="flow">
+          <li><b>0~3초</b>애프터 얼굴로 콜드오픈 "제 턱선 보이세요? 긴말 안 할게요" · 소개 멘트 없이 유니폼과 작은 자막 "상담실장"으로만</li>
+          <li><b>3~20초</b>통증 · 가격 이야기, 사이사이 시술 클로즈업</li>
+          <li><b>20~27초</b>비포 → 애프터 같은 자리 비교</li>
+          <li><b>27~30초</b>"상담 오시면 제가 직접 봐 드릴게요" → 상담 신청</li>
+        </ol>
+        <p class="src">찍을 컷: ③ ④ ⑤ / ⑥ ⑦ · 세르프 1편, 쥬베리톡스 1편 · 참고: <a href="https://www.facebook.com/ads/library/?id=2145073592747099" target="_blank" rel="noopener">오쥬엔 직원 내돈내산</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="how-h"><span class="kb">B</span><b>원장님 설명</b><span class="pill real">실제 목소리</span></div>
+    <div class="how-g">
+      <figure class="ref"><video controls playsinline preload="metadata" src="ref/ref_b.mp4"></video>
+        <figcaption>포인트업 · 원장님이 시술 비교 설명</figcaption></figure>
+      <div class="how-b">
+        <p class="lead">시술하면서 묻고 답한 것 중 굵은 한 줄만 잘라 씁니다. 말하는 동안 화면은 시술 장면.</p>
+        <ol class="flow">
+          <li><b>0~3초</b>질문 자막 "세르프, 울쎄라랑 뭐가 달라요?"</li>
+          <li><b>3~18초</b>원장님 답 한두 줄 + 비교 그래픽 (세르프 vs 울쎄라 / 따로 83.6만 vs 51만)</li>
+          <li><b>18~25초</b>실장님 애프터 얼굴 → 원장님 마무리 한 줄 → 상담 신청</li>
+        </ol>
+        <p class="src">찍을 컷: ④ ⑥ 질문 · ⑧ 원장님 단독</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="how-h"><span class="kb">C</span><b>쉬는 날 브이로그</b><span class="pill ai">AI 나레이션</span></div>
+    <div class="how-g">
+      <figure class="ref"><video controls playsinline preload="metadata" src="ref/ref_e.mp4"></video>
+        <figcaption>케이트의원 · 모델 방문 브이로그 <a href="https://www.facebook.com/ads/library/?id=4614215082197590" target="_blank" rel="noopener">광고 라이브러리</a></figcaption></figure>
+      <div class="how-b">
+        <p class="lead">실장님은 말하지 않습니다. 쉬는 날 사복으로 병원에 오는 장면부터 시술 → 거울 → 귀가까지, 손님처럼 방문하는 흐름 위에 AI 나레이션과 자막을 얹습니다. 녹음 필요 없음.</p>
+        <ol class="flow">
+          <li><b>0~3초</b>사복 셀카 · 역 출구 + "피부과 상담실장이 쉬는 날에 굳이 병원 가서 받는 시술"</li>
+          <li><b>3~10초</b>건물 · 9층 · 손님 자리에 앉기 · 세안 · 마취</li>
+          <li><b>10~22초</b>시술 클로즈업 · 장비 화면 · 가격 자막</li>
+          <li><b>22~30초</b>거울 보는 얼굴 → 귀가길 → 상담 신청</li>
+        </ol>
+        <p class="src">찍을 컷: ② ③ ④ ⑥ ⑨ (C 표시)</p>
+      </div>
+    </div>
+    <details class="nar-d"><summary>나레이션 원고 3개</summary>
+      <p class="nt">쥬베리톡스 · 가성비</p>
+      <span class="say nar">피부과 상담실장이 쉬는 날에 굳이 병원 다시 가서 받는 시술, 알려 드릴게요. 매일 견적 뽑는 게 일이라 뭐가 남는 건지는 제가 제일 잘 알거든요. 쉬는 날 아침, 사복 입고 손님 자리에 앉았어요. 받은 건 쥬베리톡스. 쥬베룩스킨, 리쥬란, 스킨보톡스, 물광, 글로우샷 다섯 가지를 한 번에 넣어요. 따로 맞으면 80만 원이 넘는데 이건 51만 원이에요. 마취하고 하니까 따끔하고 끝. 며칠 지나니까 화장이 안 뜨고 먹어요. 그래서 쉬는 날에도 이거 받으러 가요.</span>
+      <p class="nt">세르프 · 가성비</p>
+      <span class="say nar">피부과 상담실장이 쉬는 날에 굳이 병원 다시 가서 받는 리프팅, 알려 드릴게요. 매일 리프팅 상담하는데 다들 비싸서 망설이시거든요. 저도 그랬고요. 그래서 제가 고른 건 세르프예요. 처음이면 300샷 한 번으로 시작해 볼 수 있어요. 따끔은 해도 참을 만했고, 끝나고 바로 약속 나갔어요. 턱 밑이 제일 고민이었는데, 거울 보니까 라인부터 달라요. 쉬는 날 하루 쓸 만하죠?</span>
+      <p class="nt">세르프 · 통증 걱정</p>
+      <span class="say nar">리프팅 아플까 봐 못 하셨죠? 피부과 상담실장이 쉬는 날에 굳이 받으러 가는 리프팅, 알려 드릴게요. 상담할 때 제일 많이 듣는 말이 "그거 아파요?"예요. 저도 엄살 심해서 미뤘거든요. 그런 제가 쉬는 날마다 받는 게 세르프예요. 마취 크림 바르고 하니까 따끔한 정도. 턱 밑이 고민이었는데, 받고 거울 보니까 라인부터 달라요. 아파서 못 하셨던 분들, 이거부터 해 보세요.</span>
+    </details>
+  </section>
+
+  <h2>촬영 체크리스트</h2>
+
+  <div class="prog"><div class="bar"><i id="bar"></i></div><span id="cnt">0 / 0</span><button id="reset" type="button">초기화</button></div>
+
+  <h2>① 도착하자마자 · 사람 없을 때 <span class="when">장비·공간·제품, 모델 없이</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>시술실 전체 · 베드와 세르프 장비 한 화면<span class="tag">필수</span></b><p>문 앞에서 들어가며. 정리된 상태로 먼저</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>장비 본체 · 로고 천천히 다가가기<span class="tag">필수</span></b><p>정면 한 번, 45도 한 번. 화면 반사 확인</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>장비 화면 300샷 설정 숫자<span class="tag">필수</span></b></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>팁에서 냉각 가스 나오는 클로즈업</b><p>허공에 분사, 소리까지. 2~3번</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>쥬베리톡스 5종 박스 하나씩 내려놓기<span class="tag">필수</span></b><p>쥬베룩 스킨 · 리쥬란 · 스킨보톡스 · 물광 · 글로우샷. 위에서 한 번, 정면 한 번 + 사진</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>5종 주사기 트레이 · 바이알에서 약 뽑는 손</b><p>장갑 낀 손, 라벨 보이게</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>빈 상담실 · 실장님 상담 책상과 의자<span class="tag k">C</span></b><p>아무도 없는 자리 고정 5초. 책상 위 견적표를 손가락으로 짚는 컷도</p></div></div>
+
+  <h2>② 쉬는 날 병원 오는 길 <span class="when">사복, 실장님 도착할 때</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>사복 셀카 · 폰 들고 "오늘 쉬는 날" 표정<span class="tag k">C</span></b><p>첫 3초용. 역 앞이나 건물 앞에서 셀카 구도로</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>강남구청역 3번 출구 올라오는 모습<span class="tag k">C</span></b><p>뒤에서 따라가기. 얼굴 정면은 없어도 됨</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>건물 입구 → 엘리베이터 9층 버튼 누르는 손<span class="tag k">C</span></b></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>사복 그대로 환자 의자에 앉는 뒷모습<span class="tag k">C</span></b><p>평소 실장님 자리 말고 손님 자리에</p></div></div>
+
+  <h2>③ 비포 <span class="when">세안 후, 메이크업 없이</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>비포 정면 · 45도 · 측면<span class="tag">필수</span></b><p>삼각대 고정, 머리 묶고 무표정, 각 5초. 바닥에 테이프로 자리 표시 + 세팅 사진</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>거울 앞 턱 밑 · 볼 짚는 고민 동작</b><p>말 없이. 턱살 위로 당겨 보기, 턱 아래 살 집기 2~3번</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>피부결 클로즈업 · 볼 만져 보기</b><p>쥬베리톡스 비교용. 같은 조명에서</p></div></div>
+
+  <h2>④ 세르프 시술 <span class="when">원장님 → 실장님</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>베드에 누운 실장님 + 장비 와이드</b><p>발치 쪽에서</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>팁이 볼 · 턱선에 닿는 클로즈업<span class="tag">필수</span></b><p>측면 45도 · 정면 · 턱 아래 낮은 앵글. 줌 말고 고정, 앵글만 바꾸기</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>화면 샷 수 올라가는 장면 · 시술 중 표정</b></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>원장님 질문 · 세르프<span class="tag k">B</span></b><p>누운 채로 실장님이 하나씩 묻기. 원장님은 편하게 길게</p>
+    <span class="say q">세르프가 뭐예요?</span><span class="say a">피부 깊은 층에 열을 줘서 끌어올리는 리프팅이에요. <em>겉은 그대로 두고 속을 쪼이는 거죠.</em></span>
+    <span class="say q">울쎄라랑 뭐가 달라요?</span><span class="say a">목표는 비슷한데 통증 부담이 덜한 편이에요. <em>울쎄라 아파서 못 하신 분들이 많이 찾으세요.</em></span>
+    <span class="say q">아파요?</span><span class="say a"><em>따끔한 정도예요.</em> 마취 크림 바르고 하면 대부분 잘 받으세요.</span>
+    <span class="say q">어떤 분한테 맞아요?</span><span class="say a"><em>턱선 무너지기 시작한 분,</em> 이중턱이나 볼살 처짐이 고민인 분이요.</span>
+    <span class="say q">300샷이면 얼마나 해요?</span><span class="say a">얼굴 전체를 한 번 도는 양이에요. <em>처음이면 300샷으로 시작해 보시면 돼요.</em></span>
+    <span class="say q">언제부터 티 나요?</span><span class="say a">바로 당기는 느낌이 있고, <em>진짜 좋아지는 건 한 달쯤 지나서예요.</em></span>
+    <span class="say q">바로 출근해도 돼요?</span><span class="say a">붓기가 살짝 있을 수 있는데 <em>일상생활은 바로 되세요.</em></span>
+  </div></div>
+
+  <h2>⑤ 세르프 애프터 · 실장님 단독 <span class="when">비포 자리 그대로</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>애프터 정면 · 45도 · 측면<span class="tag">필수</span></b><p>테이프 자리, 같은 조명·거리·표정·머리. 비포 때 당기기·집기 동작 그대로</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>말 없이 거울 보며 턱선 만지는 모습<span class="tag k">C</span></b></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>실장님 풀 대본 · 세르프 편<span class="tag">필수</span><span class="tag k">A</span></b><p>유니폼, 앉아서 카메라 보고. 한 줄씩 끊어서 2~3번. 오른쪽 화면은 편집 때 끼워 넣을 컷</p>
+    <div class="scr">
+      <div class="sh"><span>대사 (약 30초)</span><span>그 위에 나갈 화면</span></div>
+      <div class="r"><span class="l">세르프 받고 왔는데요, 제 턱선 보이세요?</span><span class="v">실장님 · 턱선 만지기</span></div>
+      <div class="r"><span class="l">긴말 안 할게요. 턱 밑 고민이면 이거부터 하세요.</span><span class="v">③⑤ 측면 비포 → 애프터</span></div>
+      <div class="r"><span class="l">상담하면서 제일 많이 듣는 말이 "리프팅 아파요?"거든요.</span><span class="v">실장님</span></div>
+      <div class="r"><span class="l">저도 엄살 심해서 미뤘는데, 따끔한 정도였어요.</span><span class="v">④ 팁이 턱선에 닿는 클로즈업</span></div>
+      <div class="r"><span class="l">울쎄라 무서워서 못 하신 분들이 이걸로 많이 오세요.</span><span class="v">실장님</span></div>
+      <div class="r"><span class="l">처음이면 300샷으로 시작하면 돼요.</span><span class="v">① 장비 화면 300샷</span></div>
+      <div class="r"><span class="l">받고 바로 일했어요. 진짜 좋아지는 건 한 달쯤부터래요.</span><span class="v">③⑤ 정면 비포 → 애프터</span></div>
+      <div class="r"><span class="l">상담 오시면 제가 직접 봐 드릴게요.</span><span class="v">실장님</span></div>
+    </div>
+  </div></div>
+
+  <h2>⑥ 쥬베리톡스 시술 <span class="when">원장님 → 실장님</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>5종 트레이 → 주사 들어가는 클로즈업<span class="tag">필수</span></b><p>측면 45도. 바늘 끝보다 손과 트레이가 같이 보이게</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>시술 중 표정 클로즈업</b></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>원장님 질문 · 쥬베리톡스<span class="tag k">B</span></b>
+    <span class="say q">쥬베리톡스가 뭐예요?</span><span class="say a">쥬베룩스킨, 리쥬란힐러, 스킨보톡스, 물광주사, 글로우샷을 2cc씩, <em>다섯 가지를 한 번에 넣는 거예요.</em></span>
+    <span class="say q">왜 섞어요?</span><span class="say a">각자 하는 일이 달라요. 재생, 결, 모공, 수분, 광. <em>하나만 하면 하나만 좋아지니까요.</em></span>
+    <span class="say q">따로 하면 얼마예요?</span><span class="say a"><em>따로 하면 80만 원이 넘는데, 묶어서 51만 원이에요.</em></span>
+    <span class="say q">어떤 분한테 맞아요?</span><span class="say a">화장이 뜨는 분, 푸석하고 칙칙한 분, <em>뭘 할지 모르겠으면 이거부터요.</em></span>
+    <span class="say q">아파요?</span><span class="say a">주사라 따끔은 한데 <em>마취하고 하니까 금방 끝나요.</em></span>
+    <span class="say q">효과는 언제부터요?</span><span class="say a"><em>광은 며칠 안에, 결은 2~4주 지나면서</em> 올라와요.</span>
+  </div></div>
+
+  <h2>⑦ 쥬베리톡스 애프터 · 실장님 단독 <span class="when">상담 책상</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>애프터 피부결 클로즈업 · 볼 만져 보기</b><p>비포와 같은 조명·거리</p></div></div>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>실장님 풀 대본 · 쥬베리톡스 편<span class="tag">필수</span><span class="tag k">A</span></b><p>상담 책상에 5종 박스 펼쳐 놓고, 유니폼으로 앉아서. 한 줄씩 끊어서 2~3번</p>
+    <div class="scr">
+      <div class="sh"><span>대사 (약 30초)</span><span>그 위에 나갈 화면</span></div>
+      <div class="r"><span class="l">이거 다 얼굴에 넣는데 51만 원이에요.</span><span class="v">책상 위 5종 + 실장님</span></div>
+      <div class="r"><span class="l">쥬베룩스킨, 리쥬란, 스킨보톡스, 물광, 글로우샷.</span><span class="v">박스 하나씩 집어 들기</span></div>
+      <div class="r"><span class="l">제가 매일 견적 뽑는데, 이거 따로 하면 83만 원이 넘어요.</span><span class="v">견적표 손가락으로 짚기</span></div>
+      <div class="r"><span class="l">그래서 너무 싸서 제가 맞았어요.</span><span class="v">실장님 웃으며</span></div>
+      <div class="r"><span class="l">주사라 따끔은 한데 금방 끝나요.</span><span class="v">⑥ 주사 들어가는 클로즈업</span></div>
+      <div class="r"><span class="l">만져 보면 결이 달라요. 화장이 안 뜨고 먹어요.</span><span class="v">③⑦ 피부결 비포 → 애프터</span></div>
+      <div class="r"><span class="l">뭘 할지 모르겠으면 이거부터 하세요.</span><span class="v">실장님</span></div>
+      <div class="r"><span class="l">상담 오시면 제가 직접 봐 드릴게요.</span><span class="v">실장님</span></div>
+    </div>
+  </div></div>
+
+  <h2>⑧ 원장님 단독 <span class="when">시술 끝나고, 정면 고정</span></h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>원장님 카메라 보고 한 줄씩 다시<span class="tag k">B</span></b><p>④⑥ 답변에서 굵게 표시한 문장을 카메라 보고 한 번 더. 시술별 10~20초</p>
+    <span class="say">마지막 한 줄: 이벤트 가격 궁금하시면 아래 링크에서 확인해 보세요.</span></div></div>
+
+  <h2>⑨ 퇴근길</h2>
+  <div class="cut" tabindex="0"><span class="ck">✓</span><div><b>엘리베이터 거울 셀카 · 건물 나가는 뒷모습<span class="tag k">C</span></b><p>사복으로 갈아입고. 말 없이</p></div></div>
+
+  <h2>세팅</h2>
+  <ul class="dot">
+    <li>영상 전부 <b>세로 9:16</b>, 오즈모 <b>Normal 색상</b>(D-Log 금지)</li>
+    <li>실장님 · 원장님 핀마이크, 컷마다 앞뒤 2초 여유</li>
+    <li>다른 환자 얼굴 · 차트는 화면 밖으로 · 실장님 광고 사용 동의서</li>
+  </ul>
+</main>
+
+<script>
+(function () {
+  var KEY = "solin-shoot-261105-v3";
+  var cuts = Array.prototype.slice.call(document.querySelectorAll(".cut"));
+  var saved = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) {}
+  function render() {
+    var n = cuts.filter(function (c) { return c.classList.contains("done"); }).length;
+    document.getElementById("cnt").textContent = n + " / " + cuts.length;
+    document.getElementById("bar").style.width = (n / cuts.length * 100) + "%";
+  }
+  function save() {
+    var on = cuts.map(function (c, i) { return c.classList.contains("done") ? i : -1; }).filter(function (i) { return i >= 0; });
+    try { localStorage.setItem(KEY, JSON.stringify(on)); } catch (e) {}
+  }
+  function toggle(c) { c.classList.toggle("done"); save(); render(); }
+  cuts.forEach(function (c, i) {
+    if (saved.indexOf(i) >= 0) c.classList.add("done");
+    c.addEventListener("click", function () { toggle(c); });
+    c.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(c); } });
+  });
+  document.getElementById("reset").addEventListener("click", function () {
+    cuts.forEach(function (c) { c.classList.remove("done"); }); save(); render();
+  });
+  render();
+})();
+</script>
